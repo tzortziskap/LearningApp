@@ -9,18 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var modal : ContentModal
+    @EnvironmentObject var model : ContentModel
     
     var body: some View {
         ScrollView{
             LazyVStack{
-                if modal.currentModule != nil {
-                    ForEach(0..<modal.currentModule!.content.lessons.count){ index in
+                if model.currentModule != nil {
+                    ForEach(0..<model.currentModule!.content.lessons.count){ index in
                         NavigationLink(
                             destination:
                                 ContentDetailView()
                                 .onAppear(perform: {
-                                    modal.beginLesson(index)
+                                    model.beginLesson(index)
                                 }),
                             label: {
                                 ContentViewRow(index: index)
@@ -30,7 +30,7 @@ struct ContentView: View {
             }
             .accentColor(.black)
             .padding()
-            .navigationTitle("Learn \(modal.currentModule?.category ?? "")")
+            .navigationBarTitle("Learn \(model.currentModule?.category ?? "")")
         }
     }
 }

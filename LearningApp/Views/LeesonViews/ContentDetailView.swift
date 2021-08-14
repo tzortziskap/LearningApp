@@ -10,11 +10,11 @@ import AVKit
 
 struct ContentDetailView: View {
     
-    @EnvironmentObject var modal : ContentModal
+    @EnvironmentObject var model : ContentModel
     
     var body: some View {
         
-        let lesson = modal.currentLesson
+        let lesson = model.currentLesson
         let url = URL(string: Constants.VIDEOHOSTURL + (lesson?.video ?? ""))
         
         VStack{
@@ -25,26 +25,39 @@ struct ContentDetailView: View {
             
             CodeTextView()
             
-            if modal.hasNextLesson(){
+            if model.hasNextLesson(){
                 Button(action: {
-                    modal.nextLesson()
+                    model.nextLesson()
                 }, label: {
                     ZStack{
-                        Rectangle()
-                            .foregroundColor(Color.green)
-                            .aspectRatio(CGSize(width: 335, height: 48), contentMode: .fit)
-                            .cornerRadius(10)
-                            .shadow(radius: 5)
-                        Text("Next Lesson: \(modal.currentModule!.content.lessons[modal.currentLessonIndex + 1].title)")
+                        
+                        RectAngleCard(color: Color.green, shadowRadious: 5, width: 335, height: 48)
+                        
+                        Text("Next Lesson: \(model.currentModule!.content.lessons[model.currentLessonIndex + 1].title)")
                             .font(.headline)
                             .bold()
                     }
                     .accentColor(.white)
                 })
+            }else{
+                Button(action: {
+                    model.currentContentSelected = nil
+                }, label: {
+                    ZStack{
+                        
+                        RectAngleCard(color: Color.green, shadowRadious: 5, width: 335, height: 48)
+                        
+                        Text("Complete")
+                            .font(.headline)
+                            .bold()
+                    }
+                    .accentColor(.white)
+                })
+                
             }
         }
         .padding()
-        .navigationTitle(modal.currentLesson?.title ?? "")
+        .navigationBarTitle(lesson?.title ?? "")
     }
 }
 

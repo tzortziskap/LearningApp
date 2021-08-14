@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ContentModal: ObservableObject{
+class ContentModel: ObservableObject{
     
     @Published var modules = [Module]()
     
@@ -17,8 +17,15 @@ class ContentModal: ObservableObject{
     @Published var currentLesson : Lesson?
     var currentLessonIndex = 0
     
-    @Published var lessonDescription = NSAttributedString()
+    @Published var currentQuestion : Question?
+    var currentQuestionIndex = 0
+    
+    @Published var codeText = NSAttributedString()
     var styleData: Data?
+    
+    @Published var currentContentSelected : Int?
+    
+    @Published var currentTestSelected : Int?
     
     init() {
         self.modules = getLocalData()
@@ -84,8 +91,8 @@ class ContentModal: ObservableObject{
         }else{
             currentLessonIndex = 0
         }
-        currentLesson = currentModule!.content.lessons[currentModuleIndex]
-        lessonDescription = addStyling(currentLesson!.explanation)
+        currentLesson = currentModule!.content.lessons[currentLessonIndex]
+        codeText = addStyling(currentLesson!.explanation)
     }
     
     func nextLesson(){
@@ -93,7 +100,7 @@ class ContentModal: ObservableObject{
         currentLessonIndex += 1
         if currentLessonIndex < currentModule!.content.lessons.count {
             currentLesson = currentModule!.content.lessons[currentLessonIndex]
-            lessonDescription = addStyling(currentLesson!.explanation)
+            codeText = addStyling(currentLesson!.explanation)
         }else{
             currentLessonIndex = 0
             currentLesson = nil
@@ -102,6 +109,34 @@ class ContentModal: ObservableObject{
     
     func hasNextLesson() -> Bool {
         return (currentLessonIndex + 1 < currentModule!.content.lessons.count)
+    }
+    
+    func beginTest(_ moduleId : Int){
+        
+        beginModule(moduleId)
+        
+        currentQuestionIndex = 0
+        
+        if currentModule?.test.questions.count ?? 0 > 0 {
+            currentQuestion = currentModule!.test.questions[currentQuestionIndex]
+            codeText = addStyling(currentQuestion!.content)
+        }
+    }
+    
+    func nextQuestion(){
+        
+        currentQuestionIndex += 1
+        if currentQuestionIndex < currentModule!.test.questions.count {
+            currentQuestion = currentModule!.test.questions[currentLessonIndex]
+            codeText = addStyling(currentQuestion!.content)
+        }else{
+            currentQuestionIndex = 0
+            currentQuestion = nil
+        }
+    }
+    
+    func hasNextQuestion() -> Bool {
+        return (currentQuestionIndex + 1 < currentModule!.test.questions.count)
     }
     
     private func addStyling(_ htmlString: String) -> NSAttributedString{

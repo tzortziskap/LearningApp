@@ -9,12 +9,14 @@ import SwiftUI
 
 struct ContentViewRow: View {
     
-    @EnvironmentObject var modal: ContentModal
+    @EnvironmentObject var modal: ContentModel
     var index: Int
     
     var body: some View {
         let lesson = modal.currentModule!.content.lessons[index]
         ZStack(alignment: .leading){
+            
+            RectAngleCard(color: Color.white, shadowRadious: 5, width: 335, height: 66)
             Rectangle()
                 .foregroundColor(.white)
                 .cornerRadius(10)

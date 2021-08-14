@@ -18,12 +18,7 @@ struct HomeViewRow: View {
     var body: some View {
         ZStack{
             
-            Rectangle()
-                .foregroundColor(.white)
-                .cornerRadius(10)
-                .shadow(radius: 5)
-                .aspectRatio(CGSize(width:335,height: 175),
-                             contentMode: .fit)
+            RectAngleCard(color: Color.white, shadowRadious: 5, width: 335, height: 175)
             HStack{
                 
                 Image(image)
