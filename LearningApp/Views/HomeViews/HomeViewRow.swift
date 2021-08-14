@@ -41,20 +41,21 @@ struct HomeViewRow: View {
                         .padding(.bottom, 20)
                         .font(.caption)
                     
-                    HStack{
-                        Image(systemName: "text.book.closed")
-                            .resizable()
-                            .frame(width: 15, height: 15)
-                        Text(count)
-                            .font(Font.system(size: 10))
-                        
-                        Spacer()
-                        
-                        Image(systemName: "clock")
-                            .resizable()
-                            .frame(width: 15, height: 15)
-                        Text(time)
-                            .font(Font.system(size: 10))
+                    HStack(spacing:30){
+                        HStack{
+                            Image(systemName: "text.book.closed")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                            Text(count)
+                                .font(Font.system(size: 10))
+                        }
+                        HStack{
+                            Image(systemName: "clock")
+                                .resizable()
+                                .frame(width: 15, height: 15)
+                            Text(time)
+                                .font(Font.system(size: 10))
+                        }
                     }
                 }
                 .padding(.leading, 20)
