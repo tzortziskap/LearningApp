@@ -30,6 +30,7 @@ class ContentModel: ObservableObject{
     init() {
         self.modules = getLocalData()
         self.styleData = getStyleData()
+        getRemoteData()
     }
     
     func getLocalData() -> [Module]{
@@ -54,6 +55,41 @@ class ContentModel: ObservableObject{
             print(error)
         }
         return modules
+    }
+    
+    func getRemoteData(){
+        
+        let urlString = "https://tzortziskap.github.io/LearningApp-Data/data2.json"
+        
+        let url = URL(string: urlString)
+        
+        guard url != nil else {
+            return
+        }
+        
+        let request = URLRequest(url: url!)
+        
+        let session = URLSession.shared
+        
+        let dataTask = session.dataTask(with: request) { (data, response, error) in
+            
+            guard error == nil else {
+                print (error!)
+                return
+            }
+            
+            let jsonDecoder = JSONDecoder()
+            do{
+                 let modules = try jsonDecoder.decode([Module].self, from: data!)
+                 self.modules += modules
+            }
+            catch{
+                print("Could not find data")
+                print(error)
+            }
+            
+        }
+        dataTask.resume()
     }
     
     func getStyleData() -> Data{
