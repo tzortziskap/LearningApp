@@ -80,8 +80,10 @@ class ContentModel: ObservableObject{
             
             let jsonDecoder = JSONDecoder()
             do{
-                 let modules = try jsonDecoder.decode([Module].self, from: data!)
-                 self.modules += modules
+                let modules = try jsonDecoder.decode([Module].self, from: data!)
+                DispatchQueue.main.async {
+                    self.modules += modules
+                }
             }
             catch{
                 print("Could not find data")
@@ -135,8 +137,10 @@ class ContentModel: ObservableObject{
         
         currentLessonIndex += 1
         if currentLessonIndex < currentModule!.content.lessons.count {
-            currentLesson = currentModule!.content.lessons[currentLessonIndex]
-            codeText = addStyling(currentLesson!.explanation)
+            DispatchQueue.main.async {
+                self.currentLesson = self.currentModule!.content.lessons[self.currentLessonIndex]
+                self.codeText = self.addStyling(self.currentLesson!.explanation)
+            }
         }else{
             currentLessonIndex = 0
             currentLesson = nil
@@ -144,6 +148,9 @@ class ContentModel: ObservableObject{
     }
     
     func hasNextLesson() -> Bool {
+        guard currentModule != nil else {
+            return false
+        }
         return (currentLessonIndex + 1 < currentModule!.content.lessons.count)
     }
     
@@ -163,8 +170,10 @@ class ContentModel: ObservableObject{
         
         currentQuestionIndex += 1
         if currentQuestionIndex < currentModule!.test.questions.count {
-            currentQuestion = currentModule!.test.questions[currentQuestionIndex]
-            codeText = addStyling(currentQuestion!.content)
+            DispatchQueue.main.async {
+                self.currentQuestion = self.currentModule!.test.questions[self.currentQuestionIndex]
+                self.codeText = self.addStyling(self.currentQuestion!.content)
+            }
         }else{
             currentQuestionIndex = 0
             currentQuestion = nil
@@ -172,6 +181,9 @@ class ContentModel: ObservableObject{
     }
     
     func hasNextQuestion() -> Bool {
+        guard currentModule != nil else{
+            return false
+        }
         return (currentQuestionIndex + 1 < currentModule!.test.questions.count)
     }
     
