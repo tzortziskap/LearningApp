@@ -127,7 +127,7 @@ class ContentModel: ObservableObject{
         
         currentQuestionIndex += 1
         if currentQuestionIndex < currentModule!.test.questions.count {
-            currentQuestion = currentModule!.test.questions[currentLessonIndex]
+            currentQuestion = currentModule!.test.questions[currentQuestionIndex]
             codeText = addStyling(currentQuestion!.content)
         }else{
             currentQuestionIndex = 0

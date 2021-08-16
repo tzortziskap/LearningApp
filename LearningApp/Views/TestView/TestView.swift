@@ -15,6 +15,18 @@ struct TestView: View {
     @State var numCorrect = 0
     @State var submittedButton = true
     @State var questionButtons = false
+    var submitButtonText : String {
+        if questionButtons == true {
+            if model.hasNextQuestion(){
+                return "Next"
+            }
+            else{
+                return "Finish"
+            }
+        } else {
+            return "Submit"
+        }
+    }
     
     var body: some View {
         
@@ -44,7 +56,7 @@ struct TestView: View {
                                         
                                     } else {
                                         if (index == selectedAnswerIndex &&
-                                            index == model.currentQuestion!.correctIndex) ||
+                                                index == model.currentQuestion!.correctIndex) ||
                                             index == model.currentQuestion!.correctIndex{
                                             RectAngleCard(color: .green, shadowRadious: 5, width: 335, height: 48)
                                         }
@@ -66,15 +78,25 @@ struct TestView: View {
                 }
                 
                 Button{
-                    
-                    questionButtons = true
-                    if selectedAnswerIndex == model.currentQuestion!.correctIndex{
-                        numCorrect += 1
+                    if questionButtons == true {
+                        
+                        model.nextQuestion()
+                        
+                        questionButtons = false
+                        submittedButton = true
+                        selectedAnswerIndex = -1
+                        
+                    } else {
+                        questionButtons = true
+                        if selectedAnswerIndex == model.currentQuestion!.correctIndex{
+                            numCorrect += 1
+                        }
                     }
+                    
                 } label: {
                     ZStack{
                         RectAngleCard(color: .green, shadowRadious: 5, width: 335, height: 48)
-                        Text("Submit")
+                        Text(submitButtonText)
                             .bold()
                             .foregroundColor(.white)
                     }
