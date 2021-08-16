@@ -36,7 +36,7 @@ struct HomeViewRow: View {
                         .padding(.bottom, 20)
                         .font(.caption)
                     
-                    HStack(spacing:30){
+                    HStack(spacing:10){
                         HStack{
                             Image(systemName: "text.book.closed")
                                 .resizable()
