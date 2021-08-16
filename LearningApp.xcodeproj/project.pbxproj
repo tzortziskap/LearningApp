@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		271A651D26CAE93D0010C599 /* TestResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271A651C26CAE93D0010C599 /* TestResultView.swift */; };
 		272CDED626C7DC240058E14B /* RectAngleCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272CDED526C7DC240058E14B /* RectAngleCard.swift */; };
 		272CDEDA26C7E5860058E14B /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272CDED926C7E5860058E14B /* TestView.swift */; };
 		275518EF26C725440025CE6E /* LearningApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275518EE26C725440025CE6E /* LearningApp.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		271A651C26CAE93D0010C599 /* TestResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestResultView.swift; sourceTree = "<group>"; };
 		272CDED526C7DC240058E14B /* RectAngleCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectAngleCard.swift; sourceTree = "<group>"; };
 		272CDED926C7E5860058E14B /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		275518EB26C725440025CE6E /* LearningApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LearningApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				272CDED926C7E5860058E14B /* TestView.swift */,
+				271A651C26CAE93D0010C599 /* TestResultView.swift */,
 			);
 			path = TestView;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2755191F26C75F750025CE6E /* ContentViewRow.swift in Sources */,
+				271A651D26CAE93D0010C599 /* TestResultView.swift in Sources */,
 				272CDED626C7DC240058E14B /* RectAngleCard.swift in Sources */,
 				275518F126C725440025CE6E /* HomeView.swift in Sources */,
 				2755191326C72F640025CE6E /* Question.swift in Sources */,
